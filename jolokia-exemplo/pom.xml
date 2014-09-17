@@ -10,6 +10,11 @@
 	<name>jolokia-exemplo</name>
 	<url>http://maven.apache.org</url>
 
+	<properties>
+		<jettyVersion>8.1.7.v20120910</jettyVersion>
+	</properties>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -38,6 +43,9 @@
 
 
 
+
+
+
 	</dependencies>
 
 	<build>
@@ -50,6 +58,34 @@
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- This plugin is needed for the servlet example -->
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jettyVersion}</version>
+				<configuration>
+					<jettyConfig>${basedir}/src/main/resources/jetty.xml</jettyConfig>
+					<webApp>
+						<contextPath>/teste</contextPath>
+					</webApp>
+
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>commons-dbcp</groupId>
+						<artifactId>commons-dbcp</artifactId>
+						<version>1.4</version>
+					</dependency>
+					<dependency>
+						<groupId>com.h2database</groupId>
+						<artifactId>h2</artifactId>
+						<version>1.4.180</version>
+					</dependency>
+
+
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
